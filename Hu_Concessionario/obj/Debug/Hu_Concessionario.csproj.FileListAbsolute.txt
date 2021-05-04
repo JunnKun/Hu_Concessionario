@@ -1,0 +1,10 @@
+C:\Users\jacky\source\repos\Hu_Concessionario\Hu_Concessionario\bin\Debug\Hu_Concessionario.exe.config
+C:\Users\jacky\source\repos\Hu_Concessionario\Hu_Concessionario\bin\Debug\Hu_Concessionario.exe
+C:\Users\jacky\source\repos\Hu_Concessionario\Hu_Concessionario\bin\Debug\Hu_Concessionario.pdb
+C:\Users\jacky\source\repos\Hu_Concessionario\Hu_Concessionario\obj\Debug\Hu_Concessionario.csprojAssemblyReference.cache
+C:\Users\jacky\source\repos\Hu_Concessionario\Hu_Concessionario\obj\Debug\Hu_Concessionario.Properties.Resources.resources
+C:\Users\jacky\source\repos\Hu_Concessionario\Hu_Concessionario\obj\Debug\Hu_Concessionario.csproj.GenerateResource.cache
+C:\Users\jacky\source\repos\Hu_Concessionario\Hu_Concessionario\obj\Debug\Hu_Concessionario.csproj.CoreCompileInputs.cache
+C:\Users\jacky\source\repos\Hu_Concessionario\Hu_Concessionario\obj\Debug\Hu_Concessionario.exe
+C:\Users\jacky\source\repos\Hu_Concessionario\Hu_Concessionario\obj\Debug\Hu_Concessionario.pdb
+C:\Users\jacky\source\repos\Hu_Concessionario\Hu_Concessionario\obj\Debug\Hu_Concessionario.Form1.resources
