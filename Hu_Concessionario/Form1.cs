@@ -17,11 +17,32 @@ namespace Hu_Concessionario
             InitializeComponent();
         }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            form2.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form3 form3 = new Form3();
+            form3.Show();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            Motorizzazione mtr = new Motorizzazione();
-            string targa = mtr.getPlate();
-            Console.WriteLine(targa);
+            registration reg = new registration();
+            reg.Show();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

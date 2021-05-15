@@ -8,6 +8,7 @@ namespace Hu_Concessionario
 {
     static class Program
     {
+        static public List<Veicolo> carList = new List<Veicolo>();
         /// <summary>
         /// Punto di ingresso principale dell'applicazione.
         /// </summary>

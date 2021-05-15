@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft;
 
 namespace Hu_Concessionario
 {
@@ -131,13 +133,15 @@ namespace Hu_Concessionario
             set { anniGaranzia = value; }
         }
 
-        public Nuovo(string mrc, string mdl, string alm, string clr, int yGrz)
+        public Nuovo(string mrc, string mdl, string alm, string clr, string trg, int yGrz)
         {
             marca = mrc;
             modello = mdl;
             alimentazione = alm;
             colore = clr;
-            //targa = getPlate();
+            targa = trg;
+            kmPercorsi = 0;
+            anniGaranzia = yGrz;
         }
 
         /*public string getPlate()
@@ -147,6 +151,19 @@ namespace Hu_Concessionario
 
     }
 
+    public class Venditore : Persona
+    {
+        public void caricaVeicoli()
+        {
+            string file = File.ReadAllText("veicoli.json");
+            Program.carList = JsonConvert.DeserializeObject<List<Veicolo>>(file);
+        }
+
+        public void aggiuntaVeicolo(Nuovo nuovoVeicolo)
+        {
+
+        }
+    }
     public class Motorizzazione
     {
         private string licensePlate;
@@ -166,10 +183,10 @@ namespace Hu_Concessionario
 
             return plate;
         }
-
         public string Increase(char[] trg)
         {
             string conc = "";
+            conc = "";
             if (trg[6] < 90)
             {
                 trg[6] = (char)(trg[6] + 1);
@@ -219,7 +236,7 @@ namespace Hu_Concessionario
                 trg[5] = 'A';
                 trg[6] = 'A';
             }
-            for(int i = 0; i <= 6; i++) 
+            for (int i = 0; i <= 6; i++)
             {
                 conc += trg[i];
             }
@@ -239,6 +256,156 @@ namespace Hu_Concessionario
             string line = sr.ReadLine();
             sr.Close();
             return line;
+        }
+
+        public bool ricercaPresenza(string targa)
+        {
+            foreach(Veicolo veicolo in Program.carList)
+            {
+                if (targa == veicolo.Targa) return false;
+                else return true;
+            }
+            return false;
+        }
+    }
+
+    public class Persona
+    {
+        protected string name;
+        protected string surname;
+        protected string contact;
+        protected string email;
+
+
+    }
+
+    public class Cliente : Persona
+    {
+        // ATTRIBUTI OLTRE A QUELLI DERIVATI
+
+        private string password;
+        private Indirizzo indirizzo;
+        
+        // GET SET
+
+        public string Name { get { return name; } set { name = value; } }
+        public string Surname { get { return surname; } set { surname = value; } }
+        public string Contact { get { return contact; } set { contact = value; } }
+        public string Email { get { return email; } set { email = value; } }
+        public string Password { get { return password; } set { password = value; } }
+        public Indirizzo indirizzoo { get { return indirizzo; } set { indirizzo = value; } }
+        
+        public Cliente()
+        {
+            name = "z";
+            surname = "z";
+            contact = "z";
+            email = "z@z.z";
+            password = "z";
+            indirizzo = new Indirizzo();
+        }
+
+        public Cliente(string n, string s, string c, string e, string p, Indirizzo i)
+        {
+            name = n;
+            surname = s;
+            contact = c;
+            email = e;
+            password = p;
+            indirizzo = i;
+        }
+    }
+
+    public class Indirizzo
+    {
+        private string via;
+        private int nCivico;
+        private string comune;
+        private string provincia;
+
+        public string[] abbr() 
+        {
+            string[] abbreviazione = File.ReadAllLines("provincie.txt");
+            return abbreviazione;
+        }
+
+        public Indirizzo()
+        {
+            via = "z";
+            nCivico = 1;
+            comune = "z";
+            provincia = "z";
+        }
+
+        public Indirizzo(string v, int n, string c, string p)
+        {
+            via = v;
+            nCivico = n;
+            comune = c;
+            provincia = p;
+        }
+        public string Via { get { return via; } set { via = value; } }
+        public int NCivico 
+        { 
+            get { return nCivico; }
+            set
+            {
+                if (value > 0)
+                {
+                    nCivico = value;
+                }
+                else
+                {
+                    Console.WriteLine("Valore non valido");
+                    nCivico = 1;
+                }
+            }
+        }
+
+        public string Comune { get { return comune; } set { comune = value; } }
+
+        public string Provincia
+        {
+            get { return provincia; }
+            set
+            {
+                bool check = false;
+                foreach(string abbreviazione in abbr())
+                {
+                    if (value == abbreviazione) check = true;
+                }
+
+                if (check) provincia = value;
+                else Console.WriteLine("non esiste");
+            }
+        }
+    }
+
+    public class Visualizzazione
+    {
+    }
+
+    public class Concessionaria
+    {
+        private List<Cliente> client = new List<Cliente>();
+
+        public Concessionaria()
+        {
+            loadList();
+        }
+
+        public void registrazioneUtente(Cliente cle)
+        {
+            client.Add(cle);
+            string json = JsonConvert.SerializeObject(client);
+            Console.WriteLine(json);
+            File.WriteAllText("clienti.json", json);
+        }
+        public void loadList()
+        {
+            string file = File.ReadAllText("clienti.json");
+            client = JsonConvert.DeserializeObject<List<Cliente>>(file);
+            Console.WriteLine(file);
         }
     }
 }
