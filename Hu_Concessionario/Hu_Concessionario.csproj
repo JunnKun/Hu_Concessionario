@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="accedi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="accedi.Designer.cs">
+      <DependentUpon>accedi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Class2.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -76,8 +82,14 @@
     <Compile Include="registration.Designer.cs">
       <DependentUpon>registration.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="accedi.resx">
+      <DependentUpon>accedi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form3.resx">
       <DependentUpon>Form3.cs</DependentUpon>

@@ -24,8 +24,8 @@ namespace Hu_Concessionario
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2();
-            form2.Show();
+            accedi access = new accedi();
+            access.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)

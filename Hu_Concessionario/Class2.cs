@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft;
+using System.Text.RegularExpressions;
 
 namespace Hu_Concessionario
 {
@@ -17,7 +18,21 @@ namespace Hu_Concessionario
         protected string colore;
         protected string targa;
         protected int kmPercorsi;
-        protected int anniGaranzia;
+        protected string id;
+        protected int annoImmatricolazione;
+        protected float prezzo;
+
+        public string[] brands()
+        {
+            string[] marche = File.ReadAllLines("marche.txt");
+            return marche;
+        }
+
+        public string[] color()
+        {
+            string[] colori = File.ReadAllLines("colori.txt");
+            return colori;
+        }
 
         public string Marca
         {
@@ -49,10 +64,48 @@ namespace Hu_Concessionario
             get { return kmPercorsi; }
             set { kmPercorsi = value; }
         }
-        public int AnniGaranzia
+        public string Id
         {
-            get { return anniGaranzia; }
-            set { anniGaranzia = value; }
+            get { return id; }
+            set { id = value; }
+        }
+
+        public int AnnoImmatricolazione
+        {
+            get { return annoImmatricolazione; }
+            set { annoImmatricolazione = value; }
+        }
+
+        public float Prezzo
+        {
+            get { return prezzo; }
+            set { prezzo = value; }
+        }
+
+        public Veicolo()
+        {
+            marca = "-";
+            modello = "-";
+            alimentazione = "-";
+            colore = "-";
+            targa = "-";
+            kmPercorsi = 0;
+            id = "-";
+            annoImmatricolazione = 0;
+            prezzo = 0;
+        }
+
+        public Veicolo(string mrc, string mdl, string alm, string clr, string trg, int km, string id, int ymt, float prz)
+        {
+            marca = mrc;
+            modello = mdl;
+            alimentazione = alm;
+            colore = clr;
+            targa = trg;
+            kmPercorsi = km;
+            this.id = id;
+            annoImmatricolazione = ymt;
+            prezzo = prz;
         }
     }
 
@@ -88,10 +141,51 @@ namespace Hu_Concessionario
             get { return kmPercorsi; }
             set { kmPercorsi = value; }
         }
-        public new int AnniGaranzia
+        public new string Id
         {
-            get { return anniGaranzia; }
-            set { anniGaranzia = value; }
+            get { return id; }
+            set { id = value; }
+        }
+        public new int AnnoImmatricolazione
+        {
+            get { return annoImmatricolazione; }
+            set { annoImmatricolazione = value; }
+        }
+        public new float Prezzo
+        {
+            get { return prezzo; }
+            set { prezzo = value; }
+        }
+
+        public Usato()
+        {
+            marca = "-";
+            modello = "-";
+            alimentazione = "-";
+            colore = "-";
+            targa = "-";
+            kmPercorsi = 0;
+            id = "-";
+            annoImmatricolazione = 0;
+            prezzo = 0;
+        }
+        public Usato(string mrc, string mdl, string alm, string clr, string trg, int km, string id, int ymt, float prz)
+        {
+            marca = mrc;
+            modello = mdl;
+            alimentazione = alm;
+            colore = clr;
+            targa = "-";
+            kmPercorsi = km;
+            this.id = id;
+            annoImmatricolazione = ymt;
+            prezzo = prz;
+        }
+
+        public void check(string targa)
+        {
+            Regex rgx = new Regex(@"^[a-zA-Z]{2}[0-9]{3,4}[a-zA-Z]{2}$$");
+            Console.WriteLine("{0} {1} a valid part number.", targa, rgx.IsMatch(targa) ? "is" : "is not");
         }
     }
 
@@ -125,15 +219,27 @@ namespace Hu_Concessionario
         public new int KmPercorsi
         {
             get { return kmPercorsi; }
-            set { kmPercorsi = value; }
+            set {
+                if (value == 0) kmPercorsi = value;
+                else kmPercorsi = 0;
+            }
         }
-        public new int AnniGaranzia
+        public new string Id
         {
-            get { return anniGaranzia; }
-            set { anniGaranzia = value; }
+            get { return id; }
+            set { id = value; }
         }
-
-        public Nuovo(string mrc, string mdl, string alm, string clr, string trg, int yGrz)
+        public new int AnnoImmatricolazione
+        {
+            get { return annoImmatricolazione; }
+            set { annoImmatricolazione = value; }
+        }
+        public new float Prezzo
+        {
+            get { return prezzo; }
+            set { prezzo = value; }
+        }
+        public Nuovo(string mrc, string mdl, string alm, string clr, string trg, string id, float prz)
         {
             marca = mrc;
             modello = mdl;
@@ -141,7 +247,35 @@ namespace Hu_Concessionario
             colore = clr;
             targa = trg;
             kmPercorsi = 0;
-            anniGaranzia = yGrz;
+            id = "-";
+            annoImmatricolazione = Convert.ToInt32(DateTime.Now.Year);
+            prezzo = prz;
+        }
+
+        public Nuovo(string mrc, string mdl, string alm, float prz)
+        {
+            marca = mrc;
+            modello = mdl;
+            alimentazione = alm;
+            colore = "-";
+            targa = "-";
+            kmPercorsi = 0;
+            id = "-";
+            annoImmatricolazione = 0;
+            prezzo = prz;
+        }
+
+        public Nuovo()
+        {
+            marca = "-";
+            modello = "-";
+            alimentazione = "-";
+            colore = "-";
+            targa = "-";
+            kmPercorsi = 0;
+            id = "-";
+            annoImmatricolazione = 0;
+            prezzo = 0;
         }
 
         /*public string getPlate()
@@ -151,17 +285,206 @@ namespace Hu_Concessionario
 
     }
 
+    public class Km0 : Veicolo
+    {
+        public new string Marca
+        {
+            get { return marca; }
+            set { marca = value; }
+        }
+        public new string Modello
+        {
+            get { return modello; }
+            set { modello = value; }
+        }
+        public new string Alimentazione
+        {
+            get { return alimentazione; }
+            set { alimentazione = value; }
+        }
+        public new string Colore
+        {
+            get { return colore; }
+            set { colore = value; }
+        }
+        public new string Targa
+        {
+            get { return targa; }
+            set { targa = value; }
+        }
+        public new int KmPercorsi
+        {
+            get { return kmPercorsi; }
+            set { 
+                if (value >= 0 && value <= 50) kmPercorsi = value;
+                else kmPercorsi = 0;
+            }
+        }
+        public new string Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+        public new int AnnoImmatricolazione
+        {
+            get { return annoImmatricolazione; }
+            set { annoImmatricolazione = value; }
+        }
+        public new float Prezzo
+        {
+            get { return prezzo; }
+            set { prezzo = value; }
+        }
+        public Km0()
+        {
+            marca = "-";
+            modello = "-";
+            alimentazione = "-";
+            colore = "-";
+            targa = "-";
+            kmPercorsi = 0;
+            id = "-";
+            annoImmatricolazione = 0;
+            prezzo = 0;
+        }
+        public Km0(string mrc, string mdl, string alm, string clr, string trg, int km, string id, int ymt, float prz)
+        {
+            marca = mrc;
+            modello = mdl;
+            alimentazione = alm;
+            colore = clr;
+            targa = trg;
+            kmPercorsi = km;
+            this.id = id;
+            annoImmatricolazione = ymt;
+            prezzo = prz;
+        }
+    }
+
+    public class PConsegna : Veicolo
+    {
+        public new string Marca
+        {
+            get { return marca; }
+            set { marca = value; }
+        }
+        public new string Modello
+        {
+            get { return modello; }
+            set { modello = value; }
+        }
+        public new string Alimentazione
+        {
+            get { return alimentazione; }
+            set { alimentazione = value; }
+        }
+        public new string Colore
+        {
+            get { return colore; }
+            set { colore = value; }
+        }
+        public new string Targa
+        {
+            get { return targa; }
+            set { targa = value; }
+        }
+        public new int KmPercorsi
+        {
+            get { return kmPercorsi; }
+            set
+            {
+                if (value == 0) kmPercorsi = value;
+                else kmPercorsi = 0;
+            }
+        }
+        public new string Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+        public new int AnnoImmatricolazione
+        {
+            get { return annoImmatricolazione; }
+            set { annoImmatricolazione = value; }
+        }
+        public new float Prezzo
+        {
+            get { return prezzo; }
+            set { prezzo = value; }
+        }
+        public PConsegna()
+        {
+            marca = "-";
+            modello = "-";
+            alimentazione = "-";
+            colore = "-";
+            targa = "-";
+            kmPercorsi = 0;
+            id = "-";
+            annoImmatricolazione = 0;
+            prezzo = 0;
+        }
+        public PConsegna(string mrc, string mdl, string alm, string clr, string id, float prz)
+        {
+            marca = mrc;
+            modello = mdl;
+            alimentazione = alm;
+            colore = clr;
+            targa = "-";
+            kmPercorsi = 0;
+            this.id = id;
+            annoImmatricolazione = 0;
+            prezzo = prz;
+        }
+        public PConsegna(string mrc, string mdl, string alm, string clr, string id, int anno, float prz)
+        {
+            marca = mrc;
+            modello = mdl;
+            alimentazione = alm;
+            colore = clr;
+            targa = "-";
+            kmPercorsi = 0;
+            this.id = id;
+            annoImmatricolazione = anno;
+            prezzo = prz;
+        }
+    }
+
     public class Venditore : Persona
     {
-        public void caricaVeicoli()
+        public void addNewCar(Nuovo nuovoVeicolo)
         {
-            string file = File.ReadAllText("veicoli.json");
-            Program.carList = JsonConvert.DeserializeObject<List<Veicolo>>(file);
+            CarLoad("Veicoli/nuovo.json");
+            Program.carList.Add(nuovoVeicolo);
+            string json = JsonConvert.SerializeObject(Program.carList);
+            File.WriteAllText("Veicoli/nuovo.json", json);
         }
 
-        public void aggiuntaVeicolo(Nuovo nuovoVeicolo)
+        public void addUsedCar(Usato veicoloUsato)
         {
-
+            CarLoad("Veicoli/usato.json");
+            Program.carList.Add(veicoloUsato);
+            string json = JsonConvert.SerializeObject(Program.carList);
+            File.WriteAllText("Veicoli/usato.json", json);
+        }
+        private void CarLoad(string path)
+        {
+            string file = File.ReadAllText(path);
+            Program.carList = JsonConvert.DeserializeObject<List<Veicolo>>(file);
+        }
+        public void addKmCar(Km0 km0)
+        {
+            CarLoad("Veicoli/km0.json");
+            Program.carList.Add(km0);
+            string json = JsonConvert.SerializeObject(Program.carList);
+            File.WriteAllText("Veicoli/km0.json", json);
+        }
+        public void addPConsegnaCar(PConsegna pconsegna)
+        {
+            CarLoad("Veicoli/pConsegna.json");
+            Program.carList.Add(pconsegna);
+            string json = JsonConvert.SerializeObject(Program.carList);
+            File.WriteAllText("Veicoli/pConsegna.json", json);
         }
     }
     public class Motorizzazione
@@ -379,6 +702,11 @@ namespace Hu_Concessionario
                 else Console.WriteLine("non esiste");
             }
         }
+
+        public string getIndirizzo()
+        {
+            return via + ", " + nCivico + " " + comune + "(" + Provincia + ")";
+        }
     }
 
     public class Visualizzazione
@@ -388,6 +716,7 @@ namespace Hu_Concessionario
     public class Concessionaria
     {
         private List<Cliente> client = new List<Cliente>();
+        private List<Veicolo> veicolo = new List<Veicolo>();
 
         public Concessionaria()
         {
@@ -397,25 +726,97 @@ namespace Hu_Concessionario
         public void registrazioneUtente(Cliente cle)
         {
             client.Add(cle);
+            fileSaving();
+        }
+
+        public void fileSaving()
+        {
             string json = JsonConvert.SerializeObject(client);
-            Console.WriteLine(json);
+            // Console.WriteLine(json);
             File.WriteAllText("clienti.json", json);
+        }
+
+        public bool ricercaCliente(string email, string psw)
+        {
+            loadList();
+            foreach(Cliente cliente in client)
+            {
+                if(email == cliente.Email && psw == cliente.Password)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public Cliente getCliente(string email, string psw)
+        {
+            loadList();
+            foreach (Cliente clientee in client)
+            {
+                if (email == clientee.Email && psw == clientee.Password)
+                {
+                    return clientee;
+                }
+            }
+            Cliente cliente = new Cliente();
+            return cliente;
         }
         public void loadList()
         {
             string file = File.ReadAllText("clienti.json");
             client = JsonConvert.DeserializeObject<List<Cliente>>(file);
-            Console.WriteLine(file);
+            // Console.WriteLine(file);
+        }
+        public void carLoad(int i)
+        {
+            string file = "";
+            switch (i)
+            {
+                case 0:
+                    file = File.ReadAllText("Veicoli/nuovo.json");
+                    break;
+                case 1:
+                    file = File.ReadAllText("Veicoli/usato.json");
+                    break;
+                case 2:
+                    file = File.ReadAllText("Veicoli/km0.json");
+                    break;
+                case 3:
+                    file = File.ReadAllText("Veicoli/pConsegna.json");
+                    break;
+            }
+            veicolo = JsonConvert.DeserializeObject<List<Veicolo>>(file);
+        }
+        public List<Veicolo> getCarList()
+        {
+            return veicolo;
+        }
+        public void userChangePassword(string email, string vpsw, string npsw)
+        {
+            foreach (Cliente cliente in client)
+            {
+                if (email == cliente.Email)
+                {
+                    if (vpsw == cliente.Password) cliente.Password = npsw;
+                    else System.Windows.Forms.MessageBox.Show("Vecchia Password errata! Riinserire prego");
+                }
+            }
+            fileSaving();
+        }
+        public bool check(string targa)
+        {
+            Regex rgx = new Regex(@"^[a-zA-Z]{2}[0-9]{3,4}[a-zA-Z]{2}$$");
+            Console.WriteLine("{0} {1} a valid part number.", targa, rgx.IsMatch(targa) ? "is" : "is not");
+            if (rgx.IsMatch(targa)) return true;
+            else return false;
+        }
+        public string generatoreID()
+        {
+            Guid g = Guid.NewGuid();
+            string GuidString = Convert.ToBase64String(g.ToByteArray());
+            GuidString = GuidString.Replace("=", "");
+            GuidString = GuidString.Replace("+", "");
+            return GuidString;
         }
     }
 }
-/*private void incrementaTarga()
-{
-    public string acquisisciTarga()
-    {
-        Console.WriteLine("1: " + trg);
-        string targa = trg.ToString();
-        Console.WriteLine("2: " + targa);
-        incrementaTarga();
-        return targa;
-    }*/
