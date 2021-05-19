@@ -607,6 +607,7 @@ namespace Hu_Concessionario
         // ATTRIBUTI OLTRE A QUELLI DERIVATI
 
         private string password;
+        private string id;
         private Indirizzo indirizzo;
         
         // GET SET
@@ -616,6 +617,8 @@ namespace Hu_Concessionario
         public string Contact { get { return contact; } set { contact = value; } }
         public string Email { get { return email; } set { email = value; } }
         public string Password { get { return password; } set { password = value; } }
+
+        public string ID { get { return id; } set { id = value; } }
         public Indirizzo indirizzoo { get { return indirizzo; } set { indirizzo = value; } }
         
         public Cliente()
@@ -625,18 +628,22 @@ namespace Hu_Concessionario
             contact = "z";
             email = "z@z.z";
             password = "z";
+            id = "z";
             indirizzo = new Indirizzo();
         }
 
-        public Cliente(string n, string s, string c, string e, string p, Indirizzo i)
+        public Cliente(string n, string s, string c, string e, string p, string d, Indirizzo i)
         {
             name = n;
             surname = s;
             contact = c;
             email = e;
             password = p;
+            id = d;
             indirizzo = i;
         }
+
+        
     }
 
     public class Indirizzo
@@ -717,6 +724,7 @@ namespace Hu_Concessionario
     {
         private List<Cliente> client = new List<Cliente>();
         private List<Veicolo> veicolo = new List<Veicolo>();
+        private List<Offerta> offerte = new List<Offerta>();
 
         public Concessionaria()
         {
@@ -817,6 +825,85 @@ namespace Hu_Concessionario
             GuidString = GuidString.Replace("=", "");
             GuidString = GuidString.Replace("+", "");
             return GuidString;
+        }
+
+        public string generatoreIDCliente()
+        {
+            Guid myuuid = Guid.NewGuid();
+            string myuuidAsString = myuuid.ToString();
+            return myuuidAsString;
+        }
+        public float getPrezzoScontato(float prezzo, float percentuale)
+        {
+            return ( prezzo / 100 ) * ( 100 - percentuale );
+        }
+        public void aggiungiOfferta(Offerta offerta)
+        {
+            OfferteListLoad();
+            offerte.Add(offerta);
+            string json = JsonConvert.SerializeObject(offerte);
+            File.WriteAllText("offerte.json", json);
+        }
+
+        private void OfferteListLoad()
+        {
+            string file = File.ReadAllText("offerte.json");
+            offerte = JsonConvert.DeserializeObject<List<Offerta>>(file);
+        }
+    }
+    public class Offerta
+    {
+        private int stato;
+        private Veicolo veicolo;
+        private string idUtente;
+
+        public int Stato { get { return stato; } set { if(value == 0 || value == 1 || value == 2) stato = value; } }
+        
+        public Veicolo Veicolo { get { return veicolo; } set { veicolo = value; } }
+
+        public string IDUtente { get { return idUtente; } set { idUtente = value; } }
+
+        public Offerta()
+        {
+            stato = 0;
+            Veicolo = new Veicolo();
+            idUtente = "-";
+        }
+
+        public Offerta(int stato, Veicolo veicolo, string idUtente)
+        {
+            this.stato = stato;
+            this.veicolo = veicolo;
+            this.idUtente = idUtente;
+        }
+    }
+
+    class VeicoloGenerico
+    {
+        private Veicolo veicolo;
+        private string tipo;
+
+        public string Tipo
+        {
+            get { return tipo; }
+            set { tipo = value; }
+        }
+        public Veicolo Veicoloo
+        {
+            get { return veicolo; }
+            set { veicolo = value; }
+        }
+
+        public VeicoloGenerico()
+        {
+            tipo = "-";
+            veicolo = new Veicolo();
+        }
+
+        public VeicoloGenerico(string tp, Veicolo veicolo)
+        {
+            tipo = tp;
+            this.veicolo = veicolo;
         }
     }
 }

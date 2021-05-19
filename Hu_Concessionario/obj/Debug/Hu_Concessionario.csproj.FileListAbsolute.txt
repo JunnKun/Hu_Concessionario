@@ -25,3 +25,5 @@ C:\Users\jacky\Desktop\Hu_Concessionario\Hu_Concessionario\obj\Debug\Hu_Concessi
 C:\Users\jacky\Desktop\Hu_Concessionario\Hu_Concessionario\obj\Debug\Hu_Concessionario.registration.resources
 C:\Users\jacky\Desktop\Hu_Concessionario\Hu_Concessionario\obj\Debug\Hu_Concessionario.accedi.resources
 C:\Users\jacky\Desktop\Hu_Concessionario\Hu_Concessionario\obj\Debug\Hu_Concessionario.Form2.resources
+C:\Users\jacky\Desktop\Hu_Concessionario\Hu_Concessionario\obj\Debug\Hu_Concessionario.Contratta.resources
+C:\Users\jacky\Desktop\Hu_Concessionario\Hu_Concessionario\obj\Debug\Hu_Concessionario.SceltaComponenti.resources

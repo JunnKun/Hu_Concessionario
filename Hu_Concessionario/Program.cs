@@ -9,6 +9,7 @@ namespace Hu_Concessionario
     static class Program
     {
         static public List<Veicolo> carList = new List<Veicolo>();
+        static public List<VeicoloGenerico> prova = new List<VeicoloGenerico>();
         /// <summary>
         /// Punto di ingresso principale dell'applicazione.
         /// </summary>

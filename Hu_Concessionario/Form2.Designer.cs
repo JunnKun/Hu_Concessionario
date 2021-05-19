@@ -55,9 +55,6 @@ namespace Hu_Concessionario
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -66,9 +63,26 @@ namespace Hu_Concessionario
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.listView2 = new System.Windows.Forms.ListView();
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -85,6 +99,8 @@ namespace Hu_Concessionario
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label15);
+            this.tabPage1.Controls.Add(this.label16);
             this.tabPage1.Controls.Add(this.label14);
             this.tabPage1.Controls.Add(this.label13);
             this.tabPage1.Controls.Add(this.label12);
@@ -307,12 +323,14 @@ namespace Hu_Concessionario
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(195, 24);
             this.textBox4.TabIndex = 5;
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // comboBox2
             // 
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
+            "Tipo",
             "Marca",
             "Modello",
             "Alimentazione",
@@ -344,6 +362,7 @@ namespace Hu_Concessionario
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -354,33 +373,6 @@ namespace Hu_Concessionario
             // 
             this.columnHeader2.Text = "Marca";
             this.columnHeader2.Width = 71;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(640, 345);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(114, 42);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Compra";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(520, 345);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(114, 42);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Contratta";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(792, 420);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Stato Ordine";
-            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // columnHeader3
             // 
@@ -422,6 +414,128 @@ namespace Hu_Concessionario
             this.columnHeader10.Text = "ID";
             this.columnHeader10.Width = 99;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(640, 345);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(114, 42);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "Compra";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(520, 345);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(114, 42);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "Contratta";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.listView2);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(792, 420);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Stato Ordine";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Segoe UI Symbol", 12F);
+            this.label15.Location = new System.Drawing.Point(431, 146);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(16, 21);
+            this.label15.TabIndex = 19;
+            this.label15.Text = "-";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Segoe UI Symbol", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(322, 139);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(34, 30);
+            this.label16.TabIndex = 18;
+            this.label16.Text = "ID";
+            // 
+            // listView2
+            // 
+            this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader11,
+            this.columnHeader12,
+            this.columnHeader13,
+            this.columnHeader14,
+            this.columnHeader15,
+            this.columnHeader16,
+            this.columnHeader17,
+            this.columnHeader18,
+            this.columnHeader19,
+            this.columnHeader20});
+            this.listView2.FullRowSelect = true;
+            this.listView2.GridLines = true;
+            this.listView2.HideSelection = false;
+            this.listView2.Location = new System.Drawing.Point(19, 57);
+            this.listView2.Name = "listView2";
+            this.listView2.Size = new System.Drawing.Size(763, 254);
+            this.listView2.TabIndex = 3;
+            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.listView2.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "Tipo";
+            this.columnHeader11.Width = 71;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "Marca";
+            this.columnHeader12.Width = 71;
+            // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "Modello";
+            this.columnHeader13.Width = 68;
+            // 
+            // columnHeader14
+            // 
+            this.columnHeader14.Text = "Alimentazione";
+            this.columnHeader14.Width = 62;
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "Colore";
+            this.columnHeader15.Width = 65;
+            // 
+            // columnHeader16
+            // 
+            this.columnHeader16.Text = "Targa";
+            this.columnHeader16.Width = 65;
+            // 
+            // columnHeader17
+            // 
+            this.columnHeader17.Text = "KM Percorsi";
+            this.columnHeader17.Width = 96;
+            // 
+            // columnHeader18
+            // 
+            this.columnHeader18.Text = "Anno Immatricolazione";
+            this.columnHeader18.Width = 96;
+            // 
+            // columnHeader19
+            // 
+            this.columnHeader19.Text = "Prezzo";
+            this.columnHeader19.Width = 81;
+            // 
+            // columnHeader20
+            // 
+            this.columnHeader20.Text = "ID";
+            this.columnHeader20.Width = 99;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -436,6 +550,7 @@ namespace Hu_Concessionario
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -478,5 +593,18 @@ namespace Hu_Concessionario
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.ColumnHeader columnHeader10;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ColumnHeader columnHeader11;
+        private System.Windows.Forms.ColumnHeader columnHeader12;
+        private System.Windows.Forms.ColumnHeader columnHeader13;
+        private System.Windows.Forms.ColumnHeader columnHeader14;
+        private System.Windows.Forms.ColumnHeader columnHeader15;
+        private System.Windows.Forms.ColumnHeader columnHeader16;
+        private System.Windows.Forms.ColumnHeader columnHeader17;
+        private System.Windows.Forms.ColumnHeader columnHeader18;
+        private System.Windows.Forms.ColumnHeader columnHeader19;
+        private System.Windows.Forms.ColumnHeader columnHeader20;
     }
 }

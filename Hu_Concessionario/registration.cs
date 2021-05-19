@@ -49,9 +49,10 @@ namespace Hu_Concessionario
 
             if (n != 0 && check()) {
                 Indirizzo indirizzo = new Indirizzo(textBox6.Text, n, textBox8.Text, comboBox1.SelectedItem.ToString());
-                Cliente cliente = new Cliente(textBox1.Text, textBox2.Text, textBox3.Text, textBox5.Text, textBox9.Text, indirizzo);
+                string id = concessionaria.generatoreIDCliente();
+                Cliente cliente = new Cliente(textBox1.Text, textBox2.Text, textBox3.Text, textBox5.Text, textBox9.Text, id, indirizzo);
                 concessionaria.registrazioneUtente(cliente);
-                MessageBox.Show("Registrazione avvenuta con successo");
+                MessageBox.Show("Registrazione avvenuta con successo... Il suo id: " + id);
                 this.Close();
             }
             else { MessageBox.Show("Riempire tutti i campi"); }
