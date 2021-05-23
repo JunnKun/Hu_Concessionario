@@ -10,6 +10,9 @@ namespace Hu_Concessionario
     {
         static public List<Veicolo> carList = new List<Veicolo>();
         static public List<VeicoloGenerico> prova = new List<VeicoloGenerico>();
+        static public List<Usato> usato = new List<Usato>();
+        static public List<Km0> km0 = new List<Km0>();
+        static public List<PConsegna> pConsegna = new List<PConsegna>();
         /// <summary>
         /// Punto di ingresso principale dell'applicazione.
         /// </summary>

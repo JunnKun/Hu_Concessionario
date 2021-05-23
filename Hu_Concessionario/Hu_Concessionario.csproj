@@ -55,6 +55,12 @@
     <Compile Include="accedi.Designer.cs">
       <DependentUpon>accedi.cs</DependentUpon>
     </Compile>
+    <Compile Include="accessoVenditore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="accessoVenditore.Designer.cs">
+      <DependentUpon>accessoVenditore.cs</DependentUpon>
+    </Compile>
     <Compile Include="Class2.cs" />
     <Compile Include="Contratta.cs">
       <SubType>Form</SubType>
@@ -96,6 +102,9 @@
     </Compile>
     <EmbeddedResource Include="accedi.resx">
       <DependentUpon>accedi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="accessoVenditore.resx">
+      <DependentUpon>accessoVenditore.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Contratta.resx">
       <DependentUpon>Contratta.cs</DependentUpon>

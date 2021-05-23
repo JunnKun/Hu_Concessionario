@@ -29,32 +29,39 @@ namespace Hu_Concessionario
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            Offerta offerta = new Offerta(2, veicolo, id);
-            conc.aggiungiOfferta(offerta);
-            switch (opzione)
+            if (opzione == 0)
             {
-                case 0:
-                    SceltaComponenti sc = new SceltaComponenti();
-                    sc.Show();
-                    this.Close();
-                    break;
-                case 1:
-
-                    break;
-                case 2:
-
-                    break;
+                SceltaComponenti sc = new SceltaComponenti(veicolo, id);
+                sc.Show();
+                this.Close();
+            }
+            else
+            {
+                Offerta offerta = new Offerta(2, id, getTipo(), veicolo);
+                conc.aggiungiOfferta(offerta);
+                MessageBox.Show("Richiesta mandata...");
+                this.Close();
             }
         }
 
+        private string getTipo()
+        {
+            string tipo;
+            if (opzione == 0) tipo = "Nuovo";
+            else if (opzione == 1) tipo = "Pronta Consegna";
+            else if (opzione == 2) tipo = "Km 0";
+            else tipo = "Usato";
+            return tipo;
+        }
         private void Contratta_Load(object sender, EventArgs e)
         {
+            textBox3.Text = textBox1.Text;
             textBox1.Text = veicolo.Prezzo.ToString();
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            veicolo.Prezzo = conc.getPrezzoScontato(veicolo.Prezzo, (float)numericUpDown1.Value);
+            veicolo.Prezzo = conc.getPrezzoScontato(float.Parse(textBox1.Text), (float)numericUpDown1.Value);
             textBox3.Text = veicolo.Prezzo.ToString();
         }
     }

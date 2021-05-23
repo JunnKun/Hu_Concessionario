@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft;
 
 namespace Hu_Concessionario
 {
@@ -14,6 +16,7 @@ namespace Hu_Concessionario
     {
         Venditore venditore = new Venditore();
         Concessionaria conc = new Concessionaria();
+        Offerta offerta = new Offerta();
         public Form3()
         {
             InitializeComponent();
@@ -147,6 +150,20 @@ namespace Hu_Concessionario
                     break;
             }
         }
+        private void Form3_Load(object sender, EventArgs e)
+        {
+            string json = "";
+            listVisualizer();
+            conc.km0Loader();
+            json = JsonConvert.SerializeObject(Program.km0);
+            Console.WriteLine(json);
+            conc.pConsegnaLoader();
+            json = JsonConvert.SerializeObject(Program.pConsegna);
+            Console.WriteLine(json);
+            conc.UsatoLoader();
+            json = JsonConvert.SerializeObject(Program.usato);
+            Console.WriteLine(json);
+        }
 
         private void newCar()
         {
@@ -194,6 +211,137 @@ namespace Hu_Concessionario
         private void button4_Click(object sender, EventArgs e)
         {
             textBox5.Text = conc.generatoreID();
+        }
+
+        private void button2_Click(object sender, EventArgs e) // ACCETTA
+        {
+            if (listView2.SelectedItems.Count > 0)
+            {
+                if (listView2.SelectedItems[0].SubItems[0].Text == "in attesa...")
+                {
+                    foreach (Offerta offerta in conc.getOfferteList()) {
+                        if(offerta.Veicolo.Id == listView2.SelectedItems[0].SubItems[5].Text)
+                        {
+                            deleteElement();
+                            conc.setOfferteList(offerta, 0);
+                            conc.OfferteListLoad();
+                            listVisualizer();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("già confermato o rifiutato...");
+                }
+            }
+        }
+        private void deleteElement()
+        {
+            if (listView2.SelectedItems.Count > 0)
+            {
+                switch (listView2.SelectedItems[0].SubItems[4].Text)
+                {
+                    case "Pronta Consegna":
+                        foreach (PConsegna pCons in Program.pConsegna)
+                        {
+                            if (pCons.Id == listView2.SelectedItems[0].SubItems[5].Text)
+                            {
+                                Program.pConsegna.Remove(pCons);
+                                break;
+                            }
+                        }
+                        conc.pConsegnaSaver();
+                        break;
+                    case "Km 0":
+                        foreach (Km0 km0 in Program.km0)
+                        {
+                            if (km0.Id == listView2.SelectedItems[0].SubItems[5].Text)
+                            {
+                                Program.km0.Remove(km0);
+                                break;
+                            }
+                        }
+                        conc.km0Saver();
+                        break;
+                    case "Usato":
+                        foreach (Usato usato in Program.usato)
+                        {
+                            if (usato.Id == listView2.SelectedItems[0].SubItems[5].Text)
+                            {
+                                Program.usato.Remove(usato);
+                                break;
+                            }
+                        }
+                        conc.UsatoSaver();
+                        break;
+                }
+            }
+        }
+        private void button5_Click(object sender, EventArgs e) // RIFIUTA
+        {
+            if (listView2.SelectedItems.Count > 0)
+            {
+                if (listView2.SelectedItems[0].SubItems[0].Text == "in attesa...")
+                {
+                    foreach (Offerta offerta in conc.getOfferteList())
+                    {
+                        if (offerta.Veicolo.Id == listView2.SelectedItems[0].SubItems[5].Text)
+                        {
+                            conc.setOfferteList(offerta, 1);
+                            conc.OfferteListLoad();
+                            listVisualizer();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("già confermato o rifiutato...");
+                }
+            }
+        }
+
+        
+
+        private void listVisualizer()
+        {
+            listView2.Items.Clear();
+            conc.getOfferteList();
+            foreach (Offerta offerta in conc.getOfferteList())
+            {
+                string state = "";
+                switch (offerta.Stato)
+                {
+                    case 0:
+                        state = "confermato";
+                        break;
+                    case 1:
+                        state = "rifiutato";
+                        break;
+                    case 2:
+                        state = "in attesa...";
+                        break;
+                }
+                float prezzo = 0;
+                for(int i = 0; i < 4; i++)
+                {
+                    conc.carLoad(i);
+                    foreach (Veicolo veicolo in conc.getCarList())
+                    {
+                        if(veicolo.Id == offerta.Veicolo.Id)
+                        {
+                            prezzo = veicolo.Prezzo;
+                        }
+                    }
+                }
+                string[] all = { state, offerta.IDUtente, offerta.Veicolo.Marca, offerta.Veicolo.Modello, offerta.Tipo, offerta.Veicolo.Id, prezzo.ToString(), offerta.Veicolo.Prezzo.ToString() };
+                listView2.Items.Add(new ListViewItem(all));
+            }
+        }
+
+        private void listView2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            button2.Enabled = true;
+            button5.Enabled = true;
         }
     }
 }

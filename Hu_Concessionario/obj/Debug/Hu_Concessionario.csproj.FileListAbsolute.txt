@@ -27,3 +27,4 @@ C:\Users\jacky\Desktop\Hu_Concessionario\Hu_Concessionario\obj\Debug\Hu_Concessi
 C:\Users\jacky\Desktop\Hu_Concessionario\Hu_Concessionario\obj\Debug\Hu_Concessionario.Form2.resources
 C:\Users\jacky\Desktop\Hu_Concessionario\Hu_Concessionario\obj\Debug\Hu_Concessionario.Contratta.resources
 C:\Users\jacky\Desktop\Hu_Concessionario\Hu_Concessionario\obj\Debug\Hu_Concessionario.SceltaComponenti.resources
+C:\Users\jacky\Desktop\Hu_Concessionario\Hu_Concessionario\obj\Debug\Hu_Concessionario.accessoVenditore.resources

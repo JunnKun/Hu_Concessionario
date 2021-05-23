@@ -42,13 +42,6 @@ namespace Hu_Concessionario
             // 
             this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Items.AddRange(new object[] {
-            "Ibrida",
-            "Diesel",
-            "Benzina",
-            "GPL",
-            "Metano",
-            "Elettrica"});
             this.comboBox4.Location = new System.Drawing.Point(260, 125);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(210, 21);
@@ -63,6 +56,7 @@ namespace Hu_Concessionario
             this.button4.TabIndex = 48;
             this.button4.Text = "Automatico";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // textBox5
             // 
@@ -109,6 +103,7 @@ namespace Hu_Concessionario
             this.button1.TabIndex = 53;
             this.button1.Text = "Manda Richiesta";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // SceltaComponenti
             // 
@@ -124,6 +119,7 @@ namespace Hu_Concessionario
             this.Controls.Add(this.label6);
             this.Name = "SceltaComponenti";
             this.Text = "SceltaComponenti";
+            this.Load += new System.EventHandler(this.SceltaComponenti_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -44,6 +44,9 @@ namespace Hu_Concessionario
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.textBox6 = new System.Windows.Forms.TextBox();
@@ -53,12 +56,21 @@ namespace Hu_Concessionario
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label11 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.listView2 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -238,6 +250,49 @@ namespace Hu_Concessionario
             this.tabPage1.Text = "Inserimento macchina";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // comboBox4
+            // 
+            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Items.AddRange(new object[] {
+            "Ibrida",
+            "Diesel",
+            "Benzina",
+            "GPL",
+            "Metano",
+            "Elettrica"});
+            this.comboBox4.Location = new System.Drawing.Point(134, 256);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(210, 24);
+            this.comboBox4.TabIndex = 30;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.DecimalPlaces = 2;
+            this.numericUpDown1.Location = new System.Drawing.Point(135, 314);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(210, 22);
+            this.numericUpDown1.TabIndex = 29;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(131, 295);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(46, 16);
+            this.label11.TabIndex = 28;
+            this.label11.Text = "Prezzo";
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -312,6 +367,9 @@ namespace Hu_Concessionario
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button5);
+            this.tabPage2.Controls.Add(this.button2);
+            this.tabPage2.Controls.Add(this.listView2);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -320,48 +378,87 @@ namespace Hu_Concessionario
             this.tabPage2.Text = "Ordini effettuati";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label11
+            // button5
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(131, 295);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(46, 16);
-            this.label11.TabIndex = 28;
-            this.label11.Text = "Prezzo";
+            this.button5.Enabled = false;
+            this.button5.Location = new System.Drawing.Point(772, 337);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(124, 36);
+            this.button5.TabIndex = 21;
+            this.button5.Text = "Rifiuta";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // numericUpDown1
+            // button2
             // 
-            this.numericUpDown1.DecimalPlaces = 2;
-            this.numericUpDown1.Location = new System.Drawing.Point(135, 314);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(210, 22);
-            this.numericUpDown1.TabIndex = 29;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+            this.button2.Enabled = false;
+            this.button2.Location = new System.Drawing.Point(597, 337);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(124, 36);
+            this.button2.TabIndex = 20;
+            this.button2.Text = "Accetta";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // comboBox4
+            // listView2
             // 
-            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Items.AddRange(new object[] {
-            "Ibrida",
-            "Diesel",
-            "Benzina",
-            "GPL",
-            "Metano",
-            "Elettrica"});
-            this.comboBox4.Location = new System.Drawing.Point(134, 256);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(210, 24);
-            this.comboBox4.TabIndex = 30;
+            this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6,
+            this.columnHeader7,
+            this.columnHeader8});
+            this.listView2.FullRowSelect = true;
+            this.listView2.GridLines = true;
+            this.listView2.HideSelection = false;
+            this.listView2.Location = new System.Drawing.Point(16, 32);
+            this.listView2.Name = "listView2";
+            this.listView2.Size = new System.Drawing.Size(880, 254);
+            this.listView2.TabIndex = 19;
+            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.listView2.View = System.Windows.Forms.View.Details;
+            this.listView2.SelectedIndexChanged += new System.EventHandler(this.listView2_SelectedIndexChanged);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Stato";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "idUtente";
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Marca";
+            this.columnHeader3.Width = 86;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Modello";
+            this.columnHeader4.Width = 71;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Tipo";
+            this.columnHeader5.Width = 84;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "id Veicolo";
+            this.columnHeader6.Width = 89;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Prezzo Iniziale";
+            this.columnHeader7.Width = 124;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Prezzo Finale";
+            this.columnHeader8.Width = 87;
             // 
             // Form3
             // 
@@ -371,10 +468,12 @@ namespace Hu_Concessionario
             this.Controls.Add(this.tabControl1);
             this.Name = "Form3";
             this.Text = "Form3";
+            this.Load += new System.EventHandler(this.Form3_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -408,5 +507,16 @@ namespace Hu_Concessionario
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button2;
     }
 }

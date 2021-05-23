@@ -12,7 +12,7 @@ namespace Hu_Concessionario
 {
     public partial class Form2 : Form
     {
-        private string email, psw;
+        private string email, psw, id;
         Concessionaria conc = new Concessionaria();
 
         public Form2()
@@ -31,6 +31,8 @@ namespace Hu_Concessionario
         {
             visualizzazione();
             listLoader();
+            id = label15.Text;
+            secondVisualizer();
         }
         private void listLoader()
         {
@@ -98,9 +100,10 @@ namespace Hu_Concessionario
             {
                 try
                 {
-                    if (listView1.SelectedItems[0].SubItems[4].Text == "-" && listView1.SelectedItems[0].SubItems[4].Text == "-" && Convert.ToInt32(listView1.SelectedItems[0].SubItems[6].Text) == 0 && Convert.ToInt32(listView1.SelectedItems[0].SubItems[7].Text) == 0 && listView1.SelectedItems[0].SubItems[9].Text == "-") opzione = 0;
-                    else if (listView1.SelectedItems[0].SubItems[4].Text != "-" && listView1.SelectedItems[0].SubItems[4].Text == "-" && Convert.ToInt32(listView1.SelectedItems[0].SubItems[6].Text) == 0 && Convert.ToInt32(listView1.SelectedItems[0].SubItems[7].Text) == 0 && listView1.SelectedItems[0].SubItems[9].Text != "-") opzione = 1;
-                    else opzione = 2;
+                    if (listView1.SelectedItems[0].SubItems[4].Text == "-" && listView1.SelectedItems[0].SubItems[4].Text == "-" && Convert.ToInt32(listView1.SelectedItems[0].SubItems[6].Text) == 0 && Convert.ToInt32(listView1.SelectedItems[0].SubItems[7].Text) == 0 && listView1.SelectedItems[0].SubItems[9].Text == "-") opzione = 0; // Nuovo
+                    else if (listView1.SelectedItems[0].SubItems[4].Text != "-" && listView1.SelectedItems[0].SubItems[4].Text == "-" && Convert.ToInt32(listView1.SelectedItems[0].SubItems[6].Text) == 0 && Convert.ToInt32(listView1.SelectedItems[0].SubItems[7].Text) == 0 && listView1.SelectedItems[0].SubItems[9].Text != "-") opzione = 1; // Pronta Consegna
+                    else if (Convert.ToInt32(listView1.SelectedItems[0].SubItems[6].Text) >= 0 && Convert.ToInt32(listView1.SelectedItems[0].SubItems[6].Text) <= 50) opzione = 2; //KM 0
+                    else opzione = 3; // Usato
                     veicolo = new Veicolo(listView1.SelectedItems[0].SubItems[1].Text, listView1.SelectedItems[0].SubItems[2].Text, listView1.SelectedItems[0].SubItems[3].Text, listView1.SelectedItems[0].SubItems[4].Text, listView1.SelectedItems[0].SubItems[5].Text, Convert.ToInt32(listView1.SelectedItems[0].SubItems[6].Text), listView1.SelectedItems[0].SubItems[9].Text, Convert.ToInt32(listView1.SelectedItems[0].SubItems[7].Text), float.Parse(listView1.SelectedItems[0].SubItems[8].Text));
                     controllo = true;
                 }catch(Exception error)
@@ -201,6 +204,36 @@ namespace Hu_Concessionario
             }
         }
 
+        private void listView2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Motorizzazione mt = new Motorizzazione();
+            if(listView2.SelectedItems.Count > 0)
+            {
+                if(listView2.SelectedItems[0].SubItems[6].Text == "-" && listView2.SelectedItems[0].SubItems[0].Text != "in attesa...")
+                {
+                    foreach(Offerta offerta in conc.Offerte)
+                    {
+                        if (offerta.Veicolo.Id == listView2.SelectedItems[0].SubItems[5].Text) {
+                            offerta.Veicolo.Targa = mt.getPlate();
+                            offerta.Veicolo.AnnoImmatricolazione = DateTime.Now.Year;
+                            MessageBox.Show("Targa: " + offerta.Veicolo.Targa + ", Anno Immatricolazione: " + offerta.Veicolo.AnnoImmatricolazione);
+                            conc.saveList();
+                            secondVisualizer();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Ordine in attesa oppure targa già presente");
+                }
+            }
+        }
+
         public void visualizzazione()
         {
             Cliente cliente = conc.getCliente(email, psw);
@@ -210,6 +243,32 @@ namespace Hu_Concessionario
             label7.Text = cliente.Email;
             label15.Text = cliente.ID;
             label9.Text = cliente.indirizzoo.getIndirizzo();
+        }
+
+        private void secondVisualizer()
+        {
+            listView2.Items.Clear();
+            foreach(Offerta offerta in conc.getOfferteList())
+            {
+                if(offerta.IDUtente == id)
+                {
+                    string state = "";
+                    switch (offerta.Stato)
+                    {
+                        case 0:
+                            state = "confermato";
+                            break;
+                        case 1:
+                            state = "rifiutato";
+                            break;
+                        case 2:
+                            state = "in attesa...";
+                            break;
+                    }
+                    string[] all = { state, offerta.IDUtente, offerta.Veicolo.Marca, offerta.Veicolo.Modello, offerta.Tipo, offerta.Veicolo.Id, offerta.Veicolo.Targa, offerta.Veicolo.Prezzo.ToString() };
+                    listView2.Items.Add(new ListViewItem(all));
+                }
+            }
         }
     }
 }

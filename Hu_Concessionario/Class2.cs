@@ -486,6 +486,11 @@ namespace Hu_Concessionario
             string json = JsonConvert.SerializeObject(Program.carList);
             File.WriteAllText("Veicoli/pConsegna.json", json);
         }
+
+        public void editOffer(Offerta offerta, int stato)
+        {
+            offerta.Stato = stato;
+        }
     }
     public class Motorizzazione
     {
@@ -716,16 +721,14 @@ namespace Hu_Concessionario
         }
     }
 
-    public class Visualizzazione
-    {
-    }
-
     public class Concessionaria
     {
         private List<Cliente> client = new List<Cliente>();
         private List<Veicolo> veicolo = new List<Veicolo>();
         private List<Offerta> offerte = new List<Offerta>();
 
+        public List<Offerta> Offerte { get { return offerte; } set { offerte = value; } }
+        public List<Veicolo> Veicolo { get { return veicolo; } set { veicolo = value; } }
         public Concessionaria()
         {
             loadList();
@@ -795,6 +798,7 @@ namespace Hu_Concessionario
             }
             veicolo = JsonConvert.DeserializeObject<List<Veicolo>>(file);
         }
+
         public List<Veicolo> getCarList()
         {
             return veicolo;
@@ -841,40 +845,108 @@ namespace Hu_Concessionario
         {
             OfferteListLoad();
             offerte.Add(offerta);
-            string json = JsonConvert.SerializeObject(offerte);
-            File.WriteAllText("offerte.json", json);
+            saveList();
         }
 
-        private void OfferteListLoad()
+        public void OfferteListLoad()
         {
             string file = File.ReadAllText("offerte.json");
             offerte = JsonConvert.DeserializeObject<List<Offerta>>(file);
         }
+
+        public void saveList()
+        {
+            string json = JsonConvert.SerializeObject(offerte);
+            File.WriteAllText("offerte.json", json);
+        }
+        public void saveList(string path)
+        {
+            string json = JsonConvert.SerializeObject(veicolo);
+            File.WriteAllText(path, json);
+        }
+
+        public List<Offerta> getOfferteList()
+        {
+            OfferteListLoad();
+            return offerte;
+        }
+
+        public void km0Loader()
+        {
+            string file = File.ReadAllText("Veicoli/km0.json");
+            Program.km0 = JsonConvert.DeserializeObject<List<Km0>>(file);
+        }
+        public void pConsegnaLoader()
+        {
+            string file = File.ReadAllText("Veicoli/pConsegna.json");
+            Program.pConsegna = JsonConvert.DeserializeObject<List<PConsegna>>(file);
+        }
+        public void UsatoLoader()
+        {
+            string file = File.ReadAllText("Veicoli/usato.json");
+            Program.usato = JsonConvert.DeserializeObject<List<Usato>>(file);
+        }
+
+        public void km0Saver()
+        {
+            string json = JsonConvert.SerializeObject(Program.km0);
+            File.WriteAllText("Veicoli/km0.json", json);
+        }
+        public void pConsegnaSaver()
+        {
+            string json = JsonConvert.SerializeObject(Program.pConsegna);
+            File.WriteAllText("Veicoli/pConsegna.json", json);
+        }
+        public void UsatoSaver()
+        {
+            string json = JsonConvert.SerializeObject(Program.usato);
+            File.WriteAllText("Veicoli/usato.json", json);
+        }
+        public void setOfferteList(Offerta of, int stato)
+        {
+            foreach(Offerta offerta in offerte)
+            {
+                if(offerta.Veicolo.Id == of.Veicolo.Id)
+                {
+                    offerta.Stato = stato;
+                }
+            }
+            saveList();
+        }
+
+        public bool verify(string nm, string psw)
+        {
+            if (nm == "nome" && psw == "password") return true;
+            else return false;
+        }
     }
     public class Offerta
     {
-        private int stato;
-        private Veicolo veicolo;
+        private int stato; // 0 = accetta; 1 = rifiuta; 2 = in attesa...
         private string idUtente;
+        private string tipo;
+        private Veicolo veicolo;
 
         public int Stato { get { return stato; } set { if(value == 0 || value == 1 || value == 2) stato = value; } }
-        
+        public string IDUtente { get { return idUtente; } set { idUtente = value; } }
+        public string Tipo { get { return tipo; } set { tipo = value; } }
         public Veicolo Veicolo { get { return veicolo; } set { veicolo = value; } }
 
-        public string IDUtente { get { return idUtente; } set { idUtente = value; } }
 
         public Offerta()
         {
             stato = 0;
-            Veicolo = new Veicolo();
             idUtente = "-";
+            tipo = "-";
+            Veicolo = new Veicolo();
         }
 
-        public Offerta(int stato, Veicolo veicolo, string idUtente)
+        public Offerta(int stato, string idUtente, string tipo, Veicolo veicolo)
         {
             this.stato = stato;
-            this.veicolo = veicolo;
             this.idUtente = idUtente;
+            this.tipo = tipo;
+            this.veicolo = veicolo;
         }
     }
 
